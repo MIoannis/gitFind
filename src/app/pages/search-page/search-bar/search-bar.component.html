@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input formControlName="search" matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Sort</mat-label>
+
+    <mat-select formControlName="sort">
+      <mat-option *ngFor="let sort of sortItems" [value]="sort.value">
+        {{ sort.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Order</mat-label>
+
+    <mat-select formControlName="order">
+      <mat-option *ngFor="let order of orderItems" [value]="order.value">
+        {{ order.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<button class="reset-button" (click)="reset()" type="button" mat-raised-button color="warn">Reset</button>
+
+<ng-container *ngIf="(page$ | async) as page">
+  <mat-paginator
+    (page)="changePage($event)"
+    [length]="page.total_count"
+    [pageSizeOptions]="[30, 50, 100]">
+  </mat-paginator>
+</ng-container>
+
+<div *ngIf="isLoading$ | async" class="spinner-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>

@@ -1,0 +1,78 @@
+.spinner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 24px;
+  max-width: 320px;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
+.name {
+  font-size: 24px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 36px;
+}
+
+.additional-info {
+  display: flex;
+  gap: 8px;
+}
+
+.repo {
+  position: relative;
+  padding: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 6px;
+  border-color: gainsboro;
+
+  &-link {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+}
+
+.visibility {
+  border-style: solid;
+  border-width: 1px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  border-radius: 26px;
+  border-color: gainsboro;
+  width: fit-content;
+  padding: 6px;
+}
+
+.numbers {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+
+.language {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}

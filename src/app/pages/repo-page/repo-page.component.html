@@ -1,0 +1,39 @@
+<a mat-button color="primary" routerLink="/" ><mat-icon>arrow_back</mat-icon></a>
+
+<ng-container *ngIf="(repo$ | async) as repo; else loader">
+  <div class="container">
+    <div class="info">
+
+      <img class="avatar" alt="" [src]="repo.owner.avatar_url">
+      <a class="name" mat-button [href]="repo.owner.html_url" target="_blank">{{ repo.owner.login }}</a>
+
+      <div class="additional-info">
+        <div><b>Forks:</b> {{ repo.forks }}</div>
+        <div><b>Watchers:</b> {{ repo.watchers }}</div>
+      </div>
+
+      <div>{{ repo.description }}</div>
+    </div>
+
+    <div class="repo">
+      <a class="repo-link" [href]="repo.html_url" mat-button>{{ repo.full_name }}</a>
+      <div><b>Last pushed:</b> {{ repo.pushed_at | time }}</div>
+
+      <div class="visibility">{{ repo.private ? 'Private' : 'Public' }}</div>
+
+      <div class="numbers">
+        <div><b>License:</b> {{ repo.license.name }}</div>
+        <div><b>Subscribers:</b> {{ repo.subscribers_count }}</div>
+        <div><b>Issues:</b> {{ repo.open_issues}}</div>
+      </div>
+
+      <div class="language"><b>Language:</b> {{ repo.language }}</div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loader>
+  <div class="spinner">
+    <mat-spinner diameter="100"></mat-spinner>
+  </div>
+</ng-template>
