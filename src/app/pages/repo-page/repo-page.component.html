@@ -22,7 +22,7 @@
       <div class="visibility">{{ repo.private ? 'Private' : 'Public' }}</div>
 
       <div class="numbers">
-        <div><b>License:</b> {{ repo.license.name }}</div>
+        <div *ngIf="repo.license"><b>License:</b> {{ repo.license.name }}</div>
         <div><b>Subscribers:</b> {{ repo.subscribers_count }}</div>
         <div><b>Issues:</b> {{ repo.open_issues}}</div>
       </div>

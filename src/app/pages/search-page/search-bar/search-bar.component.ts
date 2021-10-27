@@ -41,12 +41,12 @@ export class SearchBarComponent implements OnInit {
   ]
   orderItems = [
     {
-      value: 'asc',
-      viewValue: 'ASC'
+      value: 'desc',
+      viewValue: 'From high to low'
     },
     {
-      value: 'desc',
-      viewValue: 'DESC'
+      value: 'asc',
+      viewValue: 'From low to high'
     }
   ]
 
@@ -61,18 +61,19 @@ export class SearchBarComponent implements OnInit {
     )
       .subscribe(
         value => {
-          this.isLoading$.next(true);
+          if (value.search) {
+            this.isLoading$.next(true);
 
-          const params = {
-            q: value.search,
-            sort: value.sort,
-            order: value.order,
-            page: 1,
-            per_page: 30
+            const params = {
+              q: value.search,
+              sort: value.sort,
+              order: value.order,
+              page: 1,
+              per_page: 30
+            }
+
+           this.updateReposList(params)
           }
-          this.githubApiService.getRepos(params)
-            .pipe(finalize(() => this.isLoading$.next(false)))
-            .subscribe(response => this.page$.next(response));
         }
       )
   }
@@ -89,12 +90,16 @@ export class SearchBarComponent implements OnInit {
 
     this.isLoading$.next(true);
 
-    this.githubApiService.getRepos(params)
-      .pipe(finalize(() => this.isLoading$.next(false)))
-      .subscribe(response => this.page$.next(response));
+    this.updateReposList(params)
   }
 
   reset(): void {
     this.form.reset({}, { emitEvent: false });
+  }
+
+  updateReposList(params: any): void {
+    this.githubApiService.getRepos(params)
+      .pipe(finalize(() => this.isLoading$.next(false)))
+      .subscribe(response => this.page$.next(response));
   }
 }

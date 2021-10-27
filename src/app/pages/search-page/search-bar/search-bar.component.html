@@ -17,7 +17,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Order</mat-label>
 
-    <mat-select formControlName="order">
+    <mat-select [disabled]="!form.value.sort" formControlName="order">
       <mat-option *ngFor="let order of orderItems" [value]="order.value">
         {{ order.viewValue }}
       </mat-option>
